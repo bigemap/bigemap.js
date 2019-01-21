@@ -1,0 +1,21 @@
+{
+  "name": "bigemap.js",
+  "main": [
+    "bigemap.css",
+    "bigemap.js",
+    "images/*"
+  ],
+  "version": "",
+  "homepage": "https://github.com/bigemap/bigemap.js",
+  "authors": ["Bigemap"],
+  "description": "Bigemap Javascript API",
+  "keywords": ["bigemap", "leaflet", "maps", "map"],
+  "license": "See LICENSE.md",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "examples"
+  ]
+}

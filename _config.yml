@@ -1,0 +1,12 @@
+url: https://122e4e-bigemap.global.ssl.fastly.net
+api: https://122e4e-bigemap.global.ssl.fastly.net/core
+tileApi: https://api-maps-staging.tilestream.net
+accessToken: pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpZ3BqeDZlcDAwMDBzcmt1YnQ1OTM4cTEifQ.54XwgUSkvlmB7gHW4vWJ3w
+env: staging
+source: docs
+permalink: /:categories/:title/
+baseurl: /bigemap.js
+bigemapjs: v3.1.1
+bigemapjsbase: /bigemap.js/dist
+defaultid: 'bigemap.streets'
+future: true

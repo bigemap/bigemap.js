@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <link rel="stylesheet" href="../../dist/bigemap.css"/>
+  <link rel="stylesheet" href="embed.css"/>
+  <script src="../../dist/bigemap.js"></script>
+  <script src="access_token.js"></script>
+</head>
+<body>
+<style>
+    #map-ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+    }
+</style>
+<div id='map'></div>
+<script type='text/javascript'>
+    L.bigemap.config.FORCE_HTTPS = true;
+    var map = L.bigemap.map('map', 'examples.map-zr0njcqy');
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'/>
+  <script src='https://unpkg.com/leaflet@1.0.1/dist/leaflet.js'></script>
+  <link rel='stylesheet' href='../../dist/bigemap.standalone.css'/>
+  <link rel='stylesheet' href='embed.css'/>
+  <script src='../../dist/bigemap.standalone.js'></script>
+  <script src='access_token.js'></script>
+</head>
+<body>
+<div id='map'></div>
+<script>
+  var map = L.bigemap.map('map', 'examples.map-zr0njcqy')
+      .addControl(L.bigemap.geocoderControl('bigemap.places'))
+      .addControl(L.bigemap.shareControl())
+
+  map.legendControl.addLegend('hee haw');
+</script>
+</body>
+</html>
