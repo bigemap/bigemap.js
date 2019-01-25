@@ -5,7 +5,7 @@ env: staging
 source: docs
 permalink: /:categories/:title/
 baseurl: /bigemap.js
-bigemapjs: v3.1.1
+bigemapjs: v3.0.0
 defaultid: 'bigemap.streets'
 exclude: [dist]
 future: true

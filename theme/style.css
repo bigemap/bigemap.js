@@ -75,7 +75,8 @@
 	left:0;
 	top:0;
 	}
-.leaflet-container {
+.leaflet-container,
+.bigemap-hidden {
 	overflow: hidden;
 	}
 .leaflet-tile,

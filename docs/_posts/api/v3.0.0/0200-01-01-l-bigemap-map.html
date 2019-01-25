@@ -1,0 +1,51 @@
+---
+layout: api
+title: "v3.0.0 JavaScript Library: L.bigemap.map(element, id|url|tilejson, options)"
+categories: api
+version: v3.0.0
+permalink: /api/v3.0.0/l-bigemap-map/
+---
+<h2 id="section-l-bigemap-map">L.bigemap.map(element, id|url|tilejson, options)</h2>
+<p>Create and automatically configure a map with layers, markers, and
+interactivity.</p>
+<p><span class='leaflet icon'><em>Extends</em>: <code><a href="/bigemap.js/api/v3.0.0/l-map-class">L.Map</a></code></span></p>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element (<em>required</em>)</td>
+<td>string</td>
+<td>Must be the id of an element, or a DOM element reference.</td>
+</tr>
+<tr>
+<td>id _or_ url _or_ tilejson</td>
+<td><strong>string</strong> if _id_ or <em>url</em> <strong>object</strong> if <em>tilejson</em></td>
+<td>url can be <ul><li>A map <code>id</code> string <code>examples.map-foo</code></li><li>A comma separated list of map <code>id</code> strings <code>examples.map-foo,examples.map-bar</code> <a href="https://www.bigemap.com/bigemap.js/example/v1.0.0/compositing/">example</a></li><li>A URL to TileJSON, like <code>{{site.tileApi}}/v3/bigemap.dark.json</code></li><li>A <a href="https://www.bigemap.com/developers/tilejson/">TileJSON</a> object, from your own Javascript code</li></ul></td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>If provided, it is the same options as provided to L.Map with the following additions: <ul><li><code>tileLayer</code> L.TileLayer options. Options passed to a <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-tilelayer">L.bigemap.tileLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-tilelayer">L.bigemap.tileLayer</a></code>.</li><li><code>featureLayer</code> <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-featurelayer">L.bigemap.featureLayer</a></code> options. Options passed to a <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-featurelayer">L.bigemap.featureLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-featurelayer">L.bigemap.featureLayer</a></code>.</li><li><code>gridLayer</code> <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-gridlayer">L.bigemap.gridLayer</a></code>. Options passed to a <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-gridlayer">L.bigemap.gridLayer</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-gridlayer">L.bigemap.gridLayer</a></code>.</li><li><code>legendControl</code> <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-legendcontrol">L.bigemap.legendControl</a></code> options. Options passed to a <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-legendcontrol">L.bigemap.legendControl</a></code> based on the TileJSON. Set to <code>false</code> to disable the <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-legendcontrol">L.bigemap.legendControl</a></code>.</li><li><code>shareControl</code>: Options passed to a <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-sharecontrol">L.bigemap.shareControl</a></code>. Set to <code>true</code> to enable the <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-sharecontrol">L.bigemap.shareControl</a></code>.</li><li><code>accessToken</code>: Bigemap API access token. Overrides <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-accesstoken">L.bigemap.accessToken</a></code> for this map.</li><li><code>attributionControl</code>: value can be <code>{compact: true}</code> to force a compact attribution icon that shows the full attribution on click, or <code>{compact: false}</code> to force the full attribution control. The default is a responsive attribution that collapses when the map is less than 640 pixels wide.</li></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em>:</p>
+<pre><code>// map refers to a &lt;div&gt; element with the ID map
+// bigemap.streets is the ID of a map on Bigemap.com
+var map = L.bigemap.map(&#39;map&#39;, &#39;bigemap.streets&#39;);
+
+// map refers to a &lt;div&gt; element with the ID map
+// This map will have no layers initially
+var map = L.bigemap.map(&#39;map&#39;);
+</code></pre><p><em>Returns</em>: a map object</p>
+<p><em>Class</em>: <code><a href="/bigemap.js/api/v3.0.0/l-bigemap-map">L.bigemap.Map</a></code></p>
+<h3 id="section-map-gettilejson">map.getTileJSON()</h3>
+<p>Returns this map&#39;s TileJSON object which determines its tile source,
+zoom bounds and other metadata.</p>
+<p><em>Returns</em>: the TileJSON object</p>
