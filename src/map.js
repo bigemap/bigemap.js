@@ -2,9 +2,6 @@
 
 var tileLayer = require('./tile_layer').tileLayer,
     featureLayer = require('./feature_layer').featureLayer,
-    gridLayer = require('./grid_layer').gridLayer,
-    gridControl = require('./grid_control').gridControl,
-    shareControl = require('./share_control').shareControl,
     legendControl = require('./legend_control').legendControl,
     bigemapLogoControl = require('./bigemap_logo').bigemapLogoControl,
     feedback = require('./feedback');
@@ -69,26 +66,9 @@ var LMap = L.Map.extend({
             this.addLayer(this.featureLayer);
         }
 
-        if (this.options.gridLayer) {
-            this.gridLayer = gridLayer(undefined,
-                withAccessToken(this.options.gridLayer, this.options.accessToken));
-            this.addLayer(this.gridLayer);
-        }
-
-        if (this.options.gridLayer && this.options.gridControl) {
-            this.gridControl = gridControl(this.gridLayer, this.options.gridControl);
-            this.addControl(this.gridControl);
-        }
-
         if (this.options.legendControl) {
             this.legendControl = legendControl(this.options.legendControl);
             this.addControl(this.legendControl);
-        }
-
-        if (this.options.shareControl) {
-            this.shareControl = shareControl(undefined,
-                withAccessToken(this.options.shareControl, this.options.accessToken));
-            this.addControl(this.shareControl);
         }
 
         this._bigemapLogoControl = bigemapLogoControl(this.options.bigemapLogoControl);

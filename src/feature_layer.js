@@ -58,7 +58,7 @@ var FeatureLayer = L.FeatureGroup.extend({
     },
 
     loadID: function(id) {
-        return this.loadURL(format_url('/v4/' + id + '/features.json', this.options.accessToken));
+        return this.loadURL(format_url('/v2/' + id + '/features.json', this.options.accessToken));
     },
 
     setFilter: function(_) {

@@ -58,7 +58,8 @@ var TileLayer = L.TileLayer.extend({
             minZoom: json.minzoom || 0,
             maxZoom: json.maxzoom || 18,
             tms: json.scheme === 'tms',
-            bounds: json.bounds && util.lbounds(json.bounds)
+            bounds: json.bounds && util.lbounds(json.bounds),
+            zoomOffset: json.zoomOffset ? json.zoomOffset : 0
         });
 
         this._tilejson = json;

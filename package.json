@@ -10,7 +10,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@bigemap/leaflet": "^1.4.2",
+    "@bigemap/leaflet": "^1.9.2",
     "@mapbox/corslite": "0.0.7",
     "isarray": "^2.0.4",
     "mustache": "^3.0.1",
@@ -37,7 +37,6 @@
     "phantomjs-prebuilt": "^2.1.16",
     "sinon": "1.10.2"
   },
-  "optionalDependencies": {},
   "engines": {
     "node": "*"
   },

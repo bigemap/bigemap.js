@@ -17,16 +17,18 @@ function icon(fp, options) {
         },
         size = fp['marker-size'] || 'medium',
         symbol = ('marker-symbol' in fp && fp['marker-symbol'] !== '') ? '-' + fp['marker-symbol'] : '',
-        color = (fp['marker-color'] || '7e7e7e').replace('#', '');
+        color = (fp['marker-color'] || '52a1d8').replace('#', '');
+        className = (fp['visibled'] === false) ? 'bigemap-hidden' : '';
 
     return L.icon({
-        iconUrl: format_url('/v4/marker/' +
+        iconUrl: format_url('/v2/marker/' +
             'pin-' + size.charAt(0) + symbol + '+' + color +
             // detect and use retina markers, which are x2 resolution
             (L.Browser.retina ? '@2x' : '') + '.png', options && options.accessToken),
         iconSize: sizes[size],
         iconAnchor: [sizes[size][0] / 2, sizes[size][1] / 2],
-        popupAnchor: [0, -sizes[size][1] / 2]
+        popupAnchor: [0, -sizes[size][1] / 2],
+        className: className
     });
 }
 

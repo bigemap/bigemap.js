@@ -48,13 +48,10 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
     return url;
 };
 
-
-module.exports.style = function(styleURL, accessToken) {
-    if (styleURL.indexOf('bigemap://styles/') === -1) throw new Error('Incorrectly formatted Bigemap style at ' + styleURL);
-
-    var ownerIDStyle = styleURL.split('bigemap://styles/')[1];
-    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken)
-        .replace('http://', 'https://');
+module.exports.token = function() {
+    var url = module.exports('/tokens/v1', 'none');
+    if (url.indexOf('https') === 0)
+        url += '&secure';
 
     return url;
 };

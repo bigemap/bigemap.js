@@ -75,8 +75,7 @@
 	left:0;
 	top:0;
 	}
-.leaflet-container,
-.bigemap-hidden {
+.leaflet-container {
 	overflow: hidden;
 	}
 .leaflet-tile,
@@ -241,7 +240,7 @@
 	        transition: none;
 	}
 
-.leaflet-zoom-anim .leaflet-zoom-hide {
+.leaflet-zoom-anim .leaflet-zoom-hide .bigemap-hidden {
 	visibility: hidden;
 	}
 
