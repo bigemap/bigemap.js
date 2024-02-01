@@ -20,7 +20,7 @@ var BigemapLogoControl = L.Control.extend({
         // is asscociated with the Bigemap Logo
         // as determined by bigemap-maps.
         if (json.bigemap_logo) {
-            L.DomUtil.addClass(this._container, 'bigemap-logo-true');
+            this._container.classList.add('bigemap-logo-true');
         }
     }
 });

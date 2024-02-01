@@ -4,7 +4,7 @@ describe('L.bigemap.simplestyle', function() {
         it("defaults", function() {
             var style = L.bigemap.simplestyle.style({});
             expect(style.opacity).to.eql(1);
-            expect(style.color).to.eql('#555555');
+            expect(style.color).to.eql('#3bb2d0');
         });
         it("options", function() {
             var style = L.bigemap.simplestyle.style({

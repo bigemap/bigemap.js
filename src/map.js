@@ -18,7 +18,6 @@ var LMap = L.Map.extend({
     options: {
         tileLayer: {},
         featureLayer: {},
-        gridLayer: {},
         legendControl: {},
         gridControl: {},
         shareControl: false,
@@ -40,15 +39,15 @@ var LMap = L.Map.extend({
             // Set a compact display if map container width is < 640 or
             // compact is set to `true` in attributionControl options.
             if (compact || (compact !== false && this._container.offsetWidth <= 640)) {
-                L.DomUtil.addClass(this.attributionControl._container, 'leaflet-compact-attribution');
+                this.attributionControl._container.classList.add('leaflet-compact-attribution');
             }
 
             if (compact === undefined) {
                 this.on('resize', function() {
                     if (this._container.offsetWidth > 640) {
-                        L.DomUtil.removeClass(this.attributionControl._container, 'leaflet-compact-attribution');
+                        this.attributionControl._container.classList.remove('leaflet-compact-attribution');
                     } else {
-                        L.DomUtil.addClass(this.attributionControl._container, 'leaflet-compact-attribution');
+                        this.attributionControl._container.classList.add('leaflet-compact-attribution');
                     }
                 });
             }
@@ -110,11 +109,6 @@ var LMap = L.Map.extend({
             this.featureLayer.loadURL(json.data[0]);
         }
 
-        if (this.gridLayer) {
-            this.gridLayer._setTileJSON(json);
-            this._updateLayer(this.gridLayer);
-        }
-
         if (this.legendControl && json.legend) {
             this.legendControl.addLegend(json.legend);
         }
@@ -160,14 +154,14 @@ var LMap = L.Map.extend({
         if ('on' in e.layer) {
             e.layer.on('ready', this._onLayerReady, this);
         }
-        window.setTimeout(L.bind(this._updateMapFeedbackLink, this), 0); // Update after attribution control resets the HTML.
+        window.setTimeout(this._updateMapFeedbackLink.bind(this), 0); // Update after attribution control resets the HTML.
     },
 
     _onLayerRemove: function(e) {
         if ('on' in e.layer) {
             e.layer.off('ready', this._onLayerReady, this);
         }
-        window.setTimeout(L.bind(this._updateMapFeedbackLink, this), 0); // Update after attribution control resets the HTML.
+        window.setTimeout(this._updateMapFeedbackLink.bind(this), 0); // Update after attribution control resets the HTML.
     },
 
     _onLayerReady: function(e) {

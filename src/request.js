@@ -1,6 +1,6 @@
 'use strict';
 
-var corslite = require('@mapbox/corslite'),
+var xhr = require('xhr'),
     strict = require('./util').strict,
     config = require('./config');
 
@@ -23,10 +23,10 @@ module.exports = function(url, callback) {
 
     function onload(err, resp) {
         if (!err && resp) {
-            resp = JSON.parse(resp.responseText);
+            resp = JSON.parse(resp.body);
         }
         callback(err, resp);
     }
 
-    return corslite(url, onload);
+    return xhr.get(url, onload);
 };

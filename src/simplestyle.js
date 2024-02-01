@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
 // an implementation of the simplestyle spec for polygon and linestring features
 // https://github.com/bigemap/simplestyle-spec
 var defaults = {
-  stroke: "#3bb2d0",
-  "stroke-width": 2,
-  "stroke-opacity": 1,
-  fill: "#3bb2d0",
-  "fill-opacity": 0.5,
+  stroke: '#3bb2d0',
+  'stroke-width': 2,
+  'stroke-opacity': 1,
+  fill: '#3bb2d0',
+  'fill-opacity': 0.5,
   visibled: true,
 };
 
 var mapping = [
-  ["stroke", "color"],
-  ["stroke-width", "weight"],
-  ["stroke-opacity", "opacity"],
-  ["fill", "fillColor"],
-  ["fill-opacity", "fillOpacity"],
+  ['stroke', 'color'],
+  ['stroke-width', 'weight'],
+  ['stroke-opacity', 'opacity'],
+  ['fill', 'fillColor'],
+  ['fill-opacity', 'fillOpacity'],
 ];
 
 function fallback(a, b) {
@@ -33,7 +33,7 @@ function remap(a) {
   for (var i = 0; i < mapping.length; i++) {
     d[mapping[i][1]] = a[mapping[i][0]];
   }
-  d["className"] = a["visibled"] === false ? "bigemap-hidden" : "";
+  d['className'] = a['visibled'] === false ? 'bigemap-hidden' : '';
   return d;
 }
 

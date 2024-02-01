@@ -11,31 +11,42 @@
   "main": "src/index.js",
   "dependencies": {
     "@bigemap/leaflet": "^1.9.2",
-    "@mapbox/corslite": "0.0.7",
-    "isarray": "^2.0.4",
-    "mustache": "^3.0.1",
-    "sanitize-caja": "^0.1.4"
+    "mustache": "^4.2.0",
+    "sanitize-caja": "^0.1.4",
+    "xhr": "^2.6.0"
   },
   "scripts": {
-    "test": "eslint --no-eslintrc -c .eslintrc src && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html"
+    "test": "eslint --no-eslintrc -c .eslintrc src && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html",
+    "prepublishOnly": "npm run build",
+    "build:js": "browserify -d src/index.js -o dist/bigemap.uncompressed.js && browserify -d src/bigemap.js -o dist/bigemap.standalone.uncompressed.js",
+    "build:css": "cleancss -o dist/bigemap.css theme/typography.css node_modules/@bigemap/leaflet/dist/leaflet.css theme/style.css",
+    "build:image": "./theme/images/render.sh",
+    "build": "npm run build:js && npm run build:js && npm run uglify",
+    "watch": "watchify -v -d src/index.js -o dist/bigemap.uncompressed.js",
+    "uglify": "uglifyjs dist/bigemap.uncompressed.js -c -m -o dist/bigemap.js && uglifyjs dist/bigemap.standalone.uncompressed.js -c -m -o dist/bigemap.standalone.js"
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "clean-css": "~2.0.7",
-    "cz-conventional-changelog": "1.2.0",
-    "eslint": "^0.23.0",
+    "browserify": "^17.0.0",
+    "clean-css-cli": "^5.6.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^6.8.0",
     "expect.js": "0.3.1",
-    "happen": "0.1.3",
-    "leaflet-fullscreen": "0.0.4",
+    "happen": "^0.3.2",
+    "leaflet-fullscreen": "^1.0.2",
     "leaflet-hash": "0.2.1",
-    "marked": "~0.3.0",
-    "minifyify": "^6.1.0",
-    "minimist": "0.0.5",
-    "mocha": "2.4.5",
-    "mocha-phantomjs-core": "2.0.1",
-    "phantomjs-prebuilt": "^2.1.16",
-    "sinon": "1.10.2"
+    "marked": "^11.1.1",
+    "minifyify": "^7.3.5",
+    "minimist": "^1.2.8",
+    "mocha": "^7.0.1",
+    "mocha-phantomjs-core": "2.1.2",
+    "phantomjs-prebuilt": "2.1.16",
+    "sinon": "7.2.4",
+    "stylelint": "^16.2.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-prettier": "^5.0.0",
+    "uglify-js": "^3.17.4",
+    "watchify": "^4.0.0"
   },
   "engines": {
     "node": "*"

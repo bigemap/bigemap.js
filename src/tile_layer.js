@@ -18,8 +18,6 @@ var TileLayer = L.TileLayer.extend({
         // JPG
         'jpg70', 'jpg80', 'jpg90'],
 
-    scalePrefix: '@2x.',
-
     initialize: function(_, options) {
         L.TileLayer.prototype.initialize.call(this, undefined, options);
 
@@ -52,11 +50,18 @@ var TileLayer = L.TileLayer.extend({
           }
         }
 
+        if (json.zoomoffset) {
+            json.zoomOffset = json.zoomoffset;
+            delete json.zoomoffset;
+        }
+
+        json.attribution = "<a href='http://www.bigemap.com'>Bigemap</a>";
+
         L.extend(this.options, {
             tiles: json.tiles,
             attribution: this.options.sanitizer(json.attribution),
-            minZoom: json.minzoom || 0,
-            maxZoom: json.maxzoom || 18,
+            minZoom: (json.minzoom || 0) - json.zoomOffset,
+            maxZoom: (json.maxzoom || 18) - json.zoomOffset,
             tms: json.scheme === 'tms',
             bounds: json.bounds && util.lbounds(json.bounds),
             zoomOffset: json.zoomOffset ? json.zoomOffset : 0
@@ -77,14 +82,8 @@ var TileLayer = L.TileLayer.extend({
         var tiles = this.options.tiles,
             index = Math.floor(Math.abs(tilePoint.x + tilePoint.y) % tiles.length),
             url = tiles[index];
-
-        var templated = L.Util.template(url, tilePoint);
-        if (!templated || !this.options.format) {
-            return templated;
-        } else {
-            return templated.replace(formatPattern,
-                (L.Browser.retina ? this.scalePrefix : '.') + this.options.format);
-        }
+        this._url = url;
+        return L.TileLayer.prototype.getTileUrl.call(this, tilePoint);
     },
 
     // TileJSON.TileLayers are added to the map immediately, so that they get

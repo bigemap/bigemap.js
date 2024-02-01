@@ -44,7 +44,7 @@ var FeatureLayer = L.FeatureGroup.extend({
 
     loadURL: function(url) {
         if (this._request && 'abort' in this._request) this._request.abort();
-        this._request = request(url, L.bind(function(err, json) {
+        this._request = request(url, function(err, json) {
             this._request = null;
             if (err && err.type !== 'abort') {
                 util.log('could not load features at ' + url);
@@ -53,7 +53,7 @@ var FeatureLayer = L.FeatureGroup.extend({
                 this.setGeoJSON(json);
                 this.fire('ready');
             }
-        }, this));
+        }.bind(this));
         return this;
     },
 
@@ -75,7 +75,7 @@ var FeatureLayer = L.FeatureGroup.extend({
     },
 
     _initialize: function(json) {
-        var features = L.Util.isArray(json) ? json : json.features,
+        var features = Array.isArray(json) ? json : json.features,
             i, len;
 
         if (features) {

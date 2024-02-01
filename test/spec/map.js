@@ -51,7 +51,7 @@ describe('L.bigemap.map', function() {
                 done();
             });
 
-            server.respondWith("GET", "http://a.tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "http://tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
         });
@@ -81,7 +81,7 @@ describe('L.bigemap.map', function() {
             var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2')
                 .setView([1, 2], 3);
 
-            server.respondWith("GET", "http://a.tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "http://tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
@@ -93,7 +93,7 @@ describe('L.bigemap.map', function() {
             var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2')
                 .setZoom(3);
 
-            server.respondWith("GET", "http://a.tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
+            server.respondWith("GET", "http://tiles.bigemap.com/v4/bigemap.map-0l53fhk2.json?access_token=key",
                 [200, { "Content-Type": "application/json" }, JSON.stringify(helpers.tileJSON)]);
             server.respond();
 
@@ -126,33 +126,15 @@ describe('L.bigemap.map', function() {
             expect(map.featureLayer.options.filter).to.equal(filter);
         });
 
-        it('passes gridLayer options to grid layer', function() {
-            var template = function() { return ''; },
-                map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {gridLayer: {template: template}});
-            expect(map.gridLayer.options.template).to.equal(template);
-        });
-
-        it('passes gridControl options to grid control', function() {
-            var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {gridControl: {pinnable: true}});
-            expect(map.gridControl.options.pinnable).to.equal(true);
-        });
-
         it('passes legendControl options to legend control', function() {
             var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {legendControl: {position: 'topleft'}});
             expect(map.legendControl.options.position).to.equal('topleft');
         });
 
-        it('passes shareControl options to share control', function() {
-            var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {shareControl: {position: 'bottomleft'}});
-            expect(map.shareControl.options.position).to.equal('bottomleft');
-        });
-
         it('passes custom access token option to sub-layers', function() {
-            var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {accessToken: 'custom', shareControl: true});
+            var map = L.bigemap.map(element, 'bigemap.map-0l53fhk2', {accessToken: 'custom'});
             expect(map.tileLayer.options.accessToken).to.equal('custom');
             expect(map.featureLayer.options.accessToken).to.equal('custom');
-            expect(map.gridLayer.options.accessToken).to.equal('custom');
-            expect(map.shareControl.options.accessToken).to.equal('custom');
         });
 
         it('supports tilejson without a center property', function(){
@@ -186,21 +168,6 @@ describe('L.bigemap.map', function() {
             var map = L.bigemap.map(element, tileJSON, {featureLayer: false});
             expect(map.featureLayer).to.be(undefined);
         });
-
-        it('adds a grid layer immediately', function() {
-            var map = L.bigemap.map(element, 'data/tilejson.json');
-            expect(map.gridLayer).to.be.ok();
-        });
-
-        it('initializes the grid layer', function() {
-            var map = L.bigemap.map(element, tileJSON);
-            expect(map.gridLayer.getTileJSON()).to.equal(tileJSON);
-        });
-
-        it('creates no grid layer given gridLayer: false option', function() {
-            var map = L.bigemap.map(element, tileJSON, {gridLayer: false});
-            expect(map.gridLayer).to.be(undefined);
-        });
     });
 
     describe('controls', function() {
@@ -212,31 +179,6 @@ describe('L.bigemap.map', function() {
         it('creates no legendControl given legendControl: false option', function() {
             var map = L.bigemap.map(element, tileJSON, {legendControl: false});
             expect(map.legendControl).to.be(undefined);
-        });
-
-        it('creates a gridControl', function() {
-            var map = L.bigemap.map(element, tileJSON);
-            expect(map.gridControl).to.be.ok();
-        });
-
-        it('does not create a shareControl by default', function() {
-            var map = L.bigemap.map(element, tileJSON);
-            expect(map.shareControl).to.be(undefined);
-        });
-
-        it('creates a shareControl by default', function() {
-            var map = L.bigemap.map(element, tileJSON, {shareControl: true});
-            expect(map.shareControl).to.be.ok();
-        });
-
-        it('creates no gridControl given gridLayer: false option', function() {
-            var map = L.bigemap.map(element, tileJSON, {gridLayer: false});
-            expect(map.gridControl).to.be(undefined);
-        });
-
-        it('creates no gridControl given gridControl: false option', function() {
-            var map = L.bigemap.map(element, tileJSON, {gridControl: false});
-            expect(map.gridControl).to.be(undefined);
         });
     });
 

@@ -16,7 +16,7 @@ describe('L.bigemap.marker', function() {
                     'marker-size': 'small'
                 }
             });
-            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+7e7e7e.png'));
+            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+52a1d8.png'));
         });
 
         it("uses @2x suffix on retina", function() {
@@ -26,7 +26,7 @@ describe('L.bigemap.marker', function() {
                     'marker-size': 'small'
                 }
             });
-            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+7e7e7e@2x.png'));
+            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+52a1d8@2x.png'));
         });
 
         it("produces a medium marker", function() {
@@ -55,7 +55,7 @@ describe('L.bigemap.marker', function() {
             }, [0, 0], {
                 accessToken: 'custom'
             });
-            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+7e7e7e.png', 'custom'));
+            expect(marker.options.icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-s+52a1d8.png', 'custom'));
         });
 
         it("tolerates empty input", function() {
@@ -95,7 +95,7 @@ describe('L.bigemap.marker', function() {
             var icon = L.bigemap.marker.icon({
                 'marker-size': 'large'
             });
-            expect(icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-l+7e7e7e.png'));
+            expect(icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-l+52a1d8.png'));
         });
 
         it("supports custom access token", function() {
@@ -104,19 +104,19 @@ describe('L.bigemap.marker', function() {
             }, {
                 accessToken: 'custom'
             });
-            expect(icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-l+7e7e7e.png', 'custom'));
+            expect(icon.options.iconUrl).to.equal(internals.url('/v4/marker/pin-l+52a1d8.png', 'custom'));
         });
 
         it("supports integer 'marker-symbol' values", function() {
             expect(L.bigemap.marker.icon({'marker-symbol': 0}).options.iconUrl)
-                .to.equal(internals.url('/v4/marker/pin-m-0+7e7e7e.png'));
+                .to.equal(internals.url('/v4/marker/pin-m-0+52a1d8.png'));
             expect(L.bigemap.marker.icon({'marker-symbol': 1}).options.iconUrl)
-                .to.equal(internals.url('/v4/marker/pin-m-1+7e7e7e.png'));
+                .to.equal(internals.url('/v4/marker/pin-m-1+52a1d8.png'));
         });
 
         it("supports 'marker-symbol' with empty string", function() {
             expect(L.bigemap.marker.icon({'marker-symbol': ''}).options.iconUrl)
-                .to.equal(internals.url('/v4/marker/pin-m+7e7e7e.png'));
+                .to.equal(internals.url('/v4/marker/pin-m+52a1d8.png'));
         });
     });
 

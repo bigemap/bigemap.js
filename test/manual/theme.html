@@ -29,12 +29,10 @@ var mapdark = L.bigemap.map('map-dark', 'bigemap.dark')
   .addControl(L.bigemap.geocoderControl('bigemap.places', {
     position: 'topright'
   }))
-  .addControl(L.bigemap.shareControl())
   .setView([37.9, -77], 5);
 
 var maplight = L.bigemap.map('map-light', 'bigemap.light')
   .addControl(L.bigemap.geocoderControl('bigemap.places'))
-  .addControl(L.bigemap.shareControl())
   .setView([37.9, -77], 5);
 
 var feature = {

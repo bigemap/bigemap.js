@@ -3,7 +3,7 @@
 var featureLayer = require('./feature_layer'),
     legendControl = require('./legend_control'),
     tileLayer = require('./tile_layer'),
-    map = require('./map')
+    map = require('./map');
 
 L.bigemap = module.exports = {
     VERSION: require('../package.json').version,
@@ -19,7 +19,7 @@ L.bigemap = module.exports = {
     Map: map.Map,
     config: require('./config'),
     sanitize: require('sanitize-caja'),
-    template: require('mustache').to_html,
+    template: require('mustache').render,
     feedback: require('./feedback')
 };
 

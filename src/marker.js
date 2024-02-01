@@ -17,7 +17,7 @@ function icon(fp, options) {
         },
         size = fp['marker-size'] || 'medium',
         symbol = ('marker-symbol' in fp && fp['marker-symbol'] !== '') ? '-' + fp['marker-symbol'] : '',
-        color = (fp['marker-color'] || '52a1d8').replace('#', '');
+        color = (fp['marker-color'] || '52a1d8').replace('#', ''),
         className = (fp['visibled'] === false) ? 'bigemap-hidden' : '';
 
     return L.icon({
