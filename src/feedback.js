@@ -1,12 +1,13 @@
-'use strict';
+import { Evented, Util } from 'leaflet';
 
-var Feedback = L.Class.extend({
-    includes: L.Mixin.Events,
-    data: {},
-    record: function(data) {
-        L.extend(this.data, data);
-        this.fire('change');
-    }
+const Feedback = Evented.extend({
+  data: {},
+  record: function (data) {
+    Util.extend(this.data, data);
+    this.fire('change');
+  }
 });
 
-module.exports = new Feedback();
+export const feedback = new Feedback();
+
+export default feedback;

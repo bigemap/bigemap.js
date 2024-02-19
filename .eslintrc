@@ -1,20 +1,54 @@
 {
   "env": {
-    "browser": true,
-    "node": true
+    "es6": true,
+    "browser": true
   },
+  "extends": ["eslint:recommended"],
   "globals": {
+    "performance": true,
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
     "L": true
   },
+  "plugins": ["jsdoc"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["dist", "build"],
+  "settings": {
+    "jsdoc": {
+      "ignorePrivate": true,
+      "preferredTypes": {
+        "object": "Object"
+      }
+    }
+  },
   "rules": {
-    "quotes": [2, "single"],
-    "no-underscore-dangle": [0],
-    "no-loop-func": [0],
-    "handle-callback-err": [0],
-    "consistent-return": [0],
-    "space-unary-ops": [0],
-    "no-shadow": [0],
-    "camelcase": [0],
-    "curly": [0]
+    "quotes": "off",
+    "strict": "off",
+    "jsdoc/check-param-names": "error",
+    "jsdoc/require-param": "error",
+    "jsdoc/require-param-description": "error",
+    "jsdoc/require-param-name": "error",
+    "jsdoc/require-returns": "error",
+    "jsdoc/require-returns-description": "error",
+    "jsdoc/require-property": "error",
+    "jsdoc/require-description-complete-sentence": "error",
+    "jsdoc/check-access": "error",
+    "jsdoc/check-examples": ["error", {
+        "matchingFileName": "src/fake_filename_for_jsdoc_examples",
+        "rejectExampleCodeRegex": "<script>"
+    }],
+    "jsdoc/check-line-alignment": "error",
+    "jsdoc/check-property-names": "error",
+    "jsdoc/check-types": "error",
+    "jsdoc/require-description": "error",
+    "jsdoc/require-example": "error",
+    "jsdoc/require-param-type": "error",
+    "jsdoc/require-property-description": "error",
+    "jsdoc/require-property-name": "error",
+    "jsdoc/require-property-type": "error",
+    "jsdoc/require-returns-type": "error"
   }
 }

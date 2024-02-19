@@ -1,7 +1,11 @@
+import config from './config';
+import formatUrl from './format_url';
+import request from './request';
+import util from './util';
+
 window.internals = {
-    url: require('./format_url'),
-    config: require('./config'),
-    util: require('./util'),
-    grid: require('./grid'),
-    request: require('./request')
+  url: formatUrl,
+  config: config,
+  util: util,
+  request: request
 };

@@ -1,0 +1,27 @@
+toc:
+  - name: "Map Object"
+    page: 'map'
+    children:
+      - Map
+  
+  - name: "Properties and options"
+    page: 'properties'
+    description: |
+      Bigemap.js's global properties and options that you can access while initializing your map or accessing information about its status.
+    children:
+      - accessToken
+      - apiUrl
+      - version
+
+  - name: "Layers"
+    page: 'layers'
+    children:
+      - FeatureLayer
+      - TileLayer
+
+  - name: "Markers and controls"
+    page: 'markers'
+    children:
+      - icon
+      - style
+      - LegendControl

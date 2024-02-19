@@ -1,24 +1,29 @@
 'use strict';
 
-var request = require('./request'),
-    format_url = require('./format_url'),
-    util = require('./util');
+import formatUrl from './format_url';
+import request from './request';
+import util from './util';
 
-module.exports = {
-    _loadTileJSON: function(_) {
-        if (typeof _ === 'string') {
-            _ = format_url.tileJSON(_, this.options && this.options.accessToken);
-            request(_, L.bind(function(err, json) {
-                if (err) {
-                    util.log('could not load TileJSON at ' + _);
-                    this.fire('error', {error: err});
-                } else if (json) {
-                    this._setTileJSON(json);
-                    this.fire('ready');
-                }
-            }, this));
-        } else if (_ && typeof _ === 'object') {
-            this._setTileJSON(_);
-        }
+export const loadTileJson = {
+  _loadTileJSON: function (_) {
+    if (typeof _ === 'string') {
+      _ = formatUrl.tileJSON(_, this.options && this.options.accessToken);
+      request(
+        _,
+        function (err, json) {
+          if (err) {
+            util.log('could not load TileJSON at ' + _);
+            this.fire('error', { error: err });
+          } else if (json) {
+            this._setTileJSON(json);
+            this.fire('ready');
+          }
+        }.bind(this)
+      );
+    } else if (_ && typeof _ === 'object') {
+      this._setTileJSON(_);
     }
+  }
 };
+
+export default loadTileJson;

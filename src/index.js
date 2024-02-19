@@ -1,7 +1,8 @@
-'use strict';
+import 'leaflet/dist/leaflet.css';
 
-var leaflet = require('./leaflet');
+import bigemap from './bigemap';
+import L from 'leaflet';
 
-require('./bigemap');
+L.bigemap = bigemap;
 
-module.exports = leaflet;
+export default L;
