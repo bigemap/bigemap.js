@@ -1,32 +1,31 @@
-'use strict';
+import { Control, Util, DomUtil } from 'leaflet';
 
-var BigemapLogoControl = L.Control.extend({
+export const BigemapLogoControl = Control.extend({
+  options: {
+    position: 'bottomleft'
+  },
 
-    options: {
-        position: 'bottomleft'
-    },
+  initialize: function (options) {
+    Util.setOptions(this, options);
+  },
 
-    initialize: function(options) {
-        L.setOptions(this, options);
-    },
+  onAdd: function () {
+    this._container = DomUtil.create('div', 'bigemap-logo');
+    return this._container;
+  },
 
-    onAdd: function() {
-        this._container = L.DomUtil.create('div', 'bigemap-logo');
-        return this._container;
-    },
-
-    _setTileJSON: function(json) {
-        // Check if account referenced by the accessToken
-        // is asscociated with the Bigemap Logo
-        // as determined by bigemap-maps.
-        if (json.bigemap_logo) {
-            this._container.classList.add('bigemap-logo-true');
-        }
+  _setTileJSON: function (json) {
+    // Check if account referenced by the accessToken
+    // is asscociated with the Bigemap Logo
+    // as determined by bigemap-maps.
+    if (json.bigemap_logo) {
+      this._container.classList.add('bigemap-logo-true');
     }
+  }
 });
 
-module.exports.BigemapLogoControl = BigemapLogoControl;
+export function bigemapLogoControl(options) {
+  return new BigemapLogoControl(options);
+}
 
-module.exports.bigemapLogoControl = function(options) {
-    return new BigemapLogoControl(options);
-};
+export default bigemapLogoControl;

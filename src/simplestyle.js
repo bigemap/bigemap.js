@@ -1,5 +1,3 @@
-'use strict';
-
 // an implementation of the simplestyle spec for polygon and linestring features
 // https://github.com/bigemap/simplestyle-spec
 var defaults = {
@@ -8,7 +6,7 @@ var defaults = {
   'stroke-opacity': 1,
   fill: '#3bb2d0',
   'fill-opacity': 0.5,
-  visibled: true,
+  visibled: true
 };
 
 var mapping = [
@@ -16,7 +14,7 @@ var mapping = [
   ['stroke-width', 'weight'],
   ['stroke-opacity', 'opacity'],
   ['fill', 'fillColor'],
-  ['fill-opacity', 'fillOpacity'],
+  ['fill-opacity', 'fillOpacity']
 ];
 
 function fallback(a, b) {
@@ -41,7 +39,9 @@ function style(feature) {
   return remap(fallback(feature.properties || {}, defaults));
 }
 
-module.exports = {
-  style: style,
+export const simplestyle = {
   defaults: defaults,
+  style: style
 };
+
+export default simplestyle;

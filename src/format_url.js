@@ -1,57 +1,55 @@
-'use strict';
+import { version } from '../package.json';
+import config from './config';
 
-var config = require('./config'),
-    version = require('../package.json').version;
+export function formatUrl(path, accessToken) {
+  accessToken = accessToken || config.ACCESS_TOKEN || L.bigemap.accessToken;
 
-module.exports = function(path, accessToken) {
-    accessToken = accessToken || L.bigemap.accessToken;
+  if (!accessToken && config.REQUIRE_ACCESS_TOKEN) {
+    throw new Error(
+      'An API access token is required to use Bigemap.js. ' +
+        'See https://www.bigemap.com/bigemap.js/api/v' +
+        version +
+        '/api-access-tokens/'
+    );
+  }
 
-    if (!accessToken && config.REQUIRE_ACCESS_TOKEN) {
-        throw new Error('An API access token is required to use Bigemap.js. ' +
-            'See https://www.bigemap.com/bigemap.js/api/v' + version + '/api-access-tokens/');
+  var url = config.API_URL;
+  url += path;
+
+  if (config.REQUIRE_ACCESS_TOKEN) {
+    if (accessToken[0] === 's') {
+      throw new Error(
+        'Use a public access token (pk.*) with Bigemap.js, not a secret access token (sk.*). ' +
+          'See https://www.bigemap.com/bigemap.js/api/v' +
+          version +
+          '/api-access-tokens/'
+      );
     }
 
-    var url = (document.location.protocol === 'https:' || config.FORCE_HTTPS) ? config.HTTPS_URL : config.HTTP_URL;
-    url = url.replace(/\/v2$/, '');
-    url += path;
+    url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
+    url += accessToken;
+  }
 
-    if (config.REQUIRE_ACCESS_TOKEN) {
-        if (accessToken[0] === 's') {
-            throw new Error('Use a public access token (pk.*) with Bigemap.js, not a secret access token (sk.*). ' +
-                'See https://www.bigemap.com/bigemap.js/api/v' + version + '/api-access-tokens/');
-        }
+  return url;
+}
 
-        url += url.indexOf('?') !== -1 ? '&access_token=' : '?access_token=';
-        url += accessToken;
-    }
+formatUrl.tileJSON = function (urlOrMapID, accessToken) {
+  if (urlOrMapID.indexOf('/') !== -1) return urlOrMapID;
 
-    return url;
+  var url = formatUrl('/v2/' + urlOrMapID + '.json', accessToken);
+
+  // TileJSON requests need a secure flag appended to their URLs so
+  // that the server knows to send SSL-ified resource references.
+  if (url.indexOf('https') === 0) url += '&secure';
+
+  return url;
 };
 
-module.exports.tileJSON = function(urlOrMapID, accessToken) {
+formatUrl.token = function () {
+  var url = formatUrl('/tokens/v1', 'none');
+  if (url.indexOf('https') === 0) url += '&secure';
 
-    if (urlOrMapID.indexOf('bigemap://styles') === 0) {
-        throw new Error('Styles created with Bigemap Studio need to be used with ' +
-            'L.bigemap.styleLayer, not L.bigemap.tileLayer');
-    }
-
-    if (urlOrMapID.indexOf('/') !== -1)
-        return urlOrMapID;
-
-    var url = module.exports('/v2/' + urlOrMapID + '.json', accessToken);
-
-    // TileJSON requests need a secure flag appended to their URLs so
-    // that the server knows to send SSL-ified resource references.
-    if (url.indexOf('https') === 0)
-        url += '&secure';
-
-    return url;
+  return url;
 };
 
-module.exports.token = function() {
-    var url = module.exports('/tokens/v1', 'none');
-    if (url.indexOf('https') === 0)
-        url += '&secure';
-
-    return url;
-};
+export default formatUrl;
