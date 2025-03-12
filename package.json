@@ -2,15 +2,16 @@
   "name": "bigemap.js",
   "author": "Bigemap",
   "description": "bigemap javascript api",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "homepage": "http://bigemap.com/",
   "repository": {
     "type": "git",
     "url": "git://github.com/bigemap/bigemap.js.git"
   },
   "license": "Apache-2.0",
-  "main": "dist/bigemap-leaflet-src.js",
-  "browser": "dist/bigemap-leaflet-src.js",
+  "main": "dist/bigemap-src.js",
+  "browser": "dist/bigemap-src.js",
+  "module": "dist/bigemap-src.esm.js",
   "files": [
     "src/**/*.js",
     "dist/**/!(internals*)"

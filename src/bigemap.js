@@ -16,7 +16,7 @@ import sanitize from './sanitize';
 /* css */
 import './css/style.css';
 
-const exported = {
+const bigemap = {
   VERSION: version,
   config,
   Map,
@@ -74,4 +74,4 @@ const exported = {
  * console.log(`Bigmeap.js v${L.bigemap.VERSION}`);
  */
 
-export default exported;
+export default bigemap;

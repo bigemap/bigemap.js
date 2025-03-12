@@ -15,8 +15,29 @@ const isProduction = process.env.NODE_ENV === 'production';
 const suffix = isProduction ? '' : '-src';
 const postcssOpts = {
   extract: true,
-  minimize: isProduction,
+  minimize: isProduction
 };
+
+function mkoutput(filename) {
+  return [
+    {
+      file: `dist/${filename}.js`,
+      //banner: copyright,
+      format: 'umd',
+      name: 'L.bigemap',
+      globals: {
+        leaflet: 'L'
+      },
+      sourcemap: true
+    },
+    {
+      file: `dist/${filename}.esm.js`,
+      //banner: copyright,
+      format: 'es',
+      sourcemap: true
+    }
+  ];
+}
 
 const config = {
   input: 'src/index.js',
@@ -26,34 +47,25 @@ const config = {
       jsnext: true,
       main: false,
       browser: true,
-      extensions: ['.js', '.json'],
+      extensions: ['.js', '.json']
     }),
     commonjs(),
     json(),
-    isProduction && terser({ format: { comments: /Bigemap/ } }),
+    isProduction && terser({ format: { comments: /Bigemap/ } })
   ],
 
-  output: {
-    file: `dist/bigemap${suffix}.js`,
-    //banner: copyright,
-    format: 'umd',
-    name: 'L.bigemap',
-    globals: {
-      leaflet: 'L',
-    },
-    sourcemap: true
-  },
+  output: mkoutput(`bigemap${suffix}`)
 };
 
 const standalone = cloneDeep(config);
 standalone.external = ['leaflet'];
 standalone.input = 'src/bigemap.js';
-standalone.output.file = `dist/bigemap-leaflet${suffix}.js`;
+standalone.output = mkoutput(`bigemap-leaflet${suffix}`);
 
 const internals = cloneDeep(config);
 internals.external = ['leaflet'];
 internals.input = 'src/internals.js';
-internals.output.file = `dist/internals${suffix}.js`;
+internals.output = mkoutput(`internals${suffix}`);
 
 config.plugins.push(postcss(postcssOpts));
 standalone.plugins.push(postcss(postcssOpts));

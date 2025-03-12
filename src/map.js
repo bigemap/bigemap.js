@@ -58,7 +58,7 @@ export const Map = LMap.extend({
 
     // Disable the default 'Leaflet' text
     if (this.attributionControl) {
-      this.attributionControl.setPrefix('');
+      this.attributionControl.setPrefix('&nbsp;');
 
       var compact = this.options.attributionControl.compact;
       // Set a compact display if map container width is < 640 or
@@ -173,7 +173,7 @@ export const Map = LMap.extend({
   },
 
   _updateMapFeedbackLink: function () {
-    if (!this._controlContainer.getElementsByClassName) return;
+    if (!this._controlContainer || !this._controlContainer.getElementsByClassName) return;
     var link = this._controlContainer.getElementsByClassName(
       'bigemap-improve-map'
     );
